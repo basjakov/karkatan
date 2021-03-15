@@ -135,7 +135,7 @@
                                         <b>Upload your images</b>
                                     </h3>
                                     <p class="alert-about">
-                                        You can upload your holiday pics!
+                                        You can upload your product pics!
                                     </p>
                                     <div style="margin-left: 50px;">
                                         <a data-image-uploader-button class="btn btn-primary btn-lg">
