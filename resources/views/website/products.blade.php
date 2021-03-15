@@ -13,7 +13,7 @@
                 <div class="col s12 l4" >
                     <div class="image_wrap">
                         <?php $image = App\Models\Product::ProductImagesFirst($product->id)?>
-                        <img src="storage/products/{{$product->id}}/{{$image->image_path}}" class="vehicle_image">
+                        <img src="storage/{{$image->image_path}}" class="vehicle_image">
                         <h5>{{$product->name}}</h5>
                         <span class="tools_username">{{$product->title}}</span>
                         <span class="tools_position"></span>

@@ -23,7 +23,7 @@
                         <div class="column-xs-12 column-md-4">
                             <figure class="img-container">
                                     <div class="popup-images">
-                                        <a class="popup-img" href="/storage/products/{{$product->id}}/{{$image->image_path}}"><img class="red" src="/storage/products/{{$product->id}}/{{$image->image_path}}" alt="aaa"></a>
+                                        <a class="popup-img" href="/storage{{$image->image_path}}"><img class="red" src="/storage{{$image->image_path}}"  loading="lazy" alt="aaa"></a>
                                     </div>
                             </figure>
                         </div>

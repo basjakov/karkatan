@@ -3,7 +3,7 @@
     id="homevehicle"
 @endsection
 @section('searchbox')
-    aaaaa
+    aaaaas
 @endsection
 @section('content')
 <div class="container">
