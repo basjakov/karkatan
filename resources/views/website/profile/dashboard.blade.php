@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 @endsection
 @section('content')
+
     <div class="container">
         <div class="row scrollspy">
             <section style="margin-top:50px;">
@@ -29,27 +30,35 @@
                                                 <a class="popup-img" href="storage/{{$image->image_path}}"><img class="red" src="storage/{{$image->image_path}}" alt="aaa"></a>
                                             </div>
                                         </figure>
-                                        <a href="{{route('product.edit',$product->id)}}" style="margin-left:40px;" class="btn waves-effect waves-light" type="submit" name="action">Edit<i class="material-icons right">border_color</i></a>
-                                        <a data-original-title="Delete" href="{{route('product.destroy',$product->id)}}}" data-toggle="tooltip" title="" class="btn waves-effect waves-light red tooltips js-ajax-delete"><i class="material-icons center">delete_sweep</i></a>
+                                        <form id="destroyproduct" method="post" action="{{route('product.destroy',$product->id)}}" >
+                                              {{ csrf_field() }}
+                                              {{ method_field('DELETE') }}
 
-                                    </div>
+                                        </form>
+                                        <a href="{{route('product.edit',$product->id)}}" style="margin-left:40px;" class="btn waves-effect waves-light" type="submit" name="action">Edit<i class="material-icons right">border_color</i></a>
+                                        <a data-original-title="Delete" data-toggle="tooltip" title="" class="btn waves-effect waves-light red tooltips js-ajax-delete" onclick="deleteProduct()" href="javascript:void(0);"><i class="material-icons center">delete_sweep</i></a>
                                 @endforeach
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
         </div>
     </div>
 @endsection
 @section('js')
-    <script src="{{asset('js/jquery.min.js')}}"></script>
+
 
     <script src="{{asset('js/smooth-scroll.min.js')}}"></script>
     <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{asset('js/popup.js')}}"></script>
 
     <script>
+        function deleteProduct(){
+            document.getElementById("destroyproduct").submit();
+        }
+
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 3,
             slidesPerGroup: 1,

@@ -101,6 +101,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+
         $folder_path = 'storage/products/'.$product->id;
 
         $files = glob($folder_path.'/*');
