@@ -40,10 +40,10 @@ class Product extends Model
         $product->tools = $validated['tools'];
         $product->likes = 0;
         $product->video_link = $request->video_link;
-        $product->tags = json_encode($tags);
+        $product->tags = $tags;
         $product->status = "pending";
         $product->category = $validated['category'];
-        $product->Description = json_encode($description);
+        $product->Description = $description;
         $product->desc_seo = $request->desc_seo;
         $product->seo_keyword = $request->seo_keyword;
         $product->save();
@@ -74,9 +74,9 @@ class Product extends Model
         $product->tools = $request->tools;
 
         $product->video_link = $request->video_link;
-        $product->tags = json_encode($tags);
+        $product->tags = $tags;
         $product->category = $request->category;
-        $product->Description = json_encode($description);
+        $product->Description = $description;
         $product->desc_seo = $request->desc_seo;
         $product->seo_keyword = $request->seo_keyword;
         $product->save();
@@ -98,4 +98,6 @@ class Product extends Model
     public static function ProductImagesFirst($productid){
         return productimages::where('product_id',$productid)->first();
     }
+
+
 }

@@ -8,6 +8,13 @@ use App\Http\Requests\ProductValidationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+//working with storage
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Detail;
+
 class ProductController extends Controller
 {
     /**
@@ -112,5 +119,9 @@ class ProductController extends Controller
 
 
         return redirect('/dashboard')->with('success', 'Product deleted!');
+    }
+    public function DestroyImage($id){
+        productimages::ProductImageDestroy($id);
+        return redirect()->back();
     }
 }

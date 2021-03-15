@@ -143,7 +143,7 @@
                                             Upload Images
                                         </a>
                                     </div>
-                                    <input data-image-uploader class="hidden" type="file" name="images[]" id="fileToUpload" accept="image/*" capture=camera" multiple/>
+                                    <input data-image-uploader class="hidden" type="file" name="images[]" id="fileToUpload"  capture=camera" multiple/>
                                     <div data-image-uploads class="images-holder"></div>
                                 </div>
                             </div>

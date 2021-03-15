@@ -104,8 +104,15 @@
 @section('content')
     <div class="row">
         <div class="col s5">
+            <div class="main_buttons">
+                <a href="{{ route('dashboard') }}" class="waves-effect waves-light btn-small"><span class="material-icons" style="margin:5px;">arrow_back</span></a>
+            </div>
             <div class="center-align">
-
+                <div  class="images-holder">
+                    @foreach($product_images as $image)
+                        @include('website.profile.product.imagedestroy')
+                    @endforeach
+                </div>
             </div>
         </div>
         <div class="col s6">
@@ -145,7 +152,10 @@
                                     </a>
                                 </div>
                                 <input data-image-uploader class="hidden" type="file" name="images[]" id="fileToUpload" accept="image/*" capture=camera" multiple/>
-                                <div data-image-uploads class="images-holder"></div>
+                                <div data-image-uploads class="images-holder">
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -181,13 +191,12 @@
 
             <input type="text" name="desc_seo" value="{{ $product->desc_seo }}">
             <input type="text" name="seo_keyword" value="{{$product->seo_keyword}}">
-            <input type="submit" value="update product">
+            <input type="submit" class="waves-effect waves-light btn-small" value="update product">
         </form>
         </div>
     </div>
 @endsection
 @section('js')
-   git a
     <script type="text/javascript">
         var $btn = $('[data-image-uploader-button]')
         var $uploaderApp = $('[data-image-uploader-app]')
@@ -291,5 +300,7 @@
             updateThumbnails(imageFiles)
 
         })
+
     </script>
 @endsection
+

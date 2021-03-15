@@ -25,7 +25,9 @@ Route::get('/dashboard/profile/{id}',[AccountController::class,'show'])->name('u
 
 Route::prefix('/dashboard')->middleware(['auth', 'auth'])->group(function () {
     Route::resource('/product', ProductController::class);
+    Route::delete('/product/imagedestroy/{id}',[ProductController::class,'DestroyImage'])->name('product.destroyimage');
 });
+
 
 Route::get('/products',[PagesController::class,'Products'])->name('products');
 Route::get('/experts',[PagesController::class,'Experts'])->name('experts');
