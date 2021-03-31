@@ -10,8 +10,8 @@
                         <h5 class="username_profile">{{$profile->position}}</h5>
                         <h6 class="postition"><i class="fas fa-compass location_icon"></i> {{$profile->region}} {{$profile->city}},{{$profile->country}}</h6>
                         @if(Auth::check())
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Follow
-                            <i class="material-icons right">send</i>
+                        <button  onclick="window.location.href='{{route('order.create',$profile->id)}}'" class="btn waves-effect waves-light" type="submit" name="action">Order
+                            <i class="material-icons right">book_online</i>
                         </button>
                         <button class="btn waves-effect waves-light" type="submit" name="action">Message
                             <i class="material-icons right">send</i>

@@ -119,14 +119,17 @@
         <form method="post" action="{{route('product.update',$product->id)}}" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
+            <label for="name" class="dashboard_label">{{ __('product.name') }}</label>
             <input type="text" name="name" value="{{ $product->name}}">
             @if($errors->has('name'))
                 <span class="help-block text-danger">{{ $errors->first('name') }}</span>
             @endif
+            <label for="title" class="dashboard_label">{{ __('product.title') }}</label>
             <input type="text" name="title" value="{{ $product->title}}">
             @if($errors->has('title'))
                 <span class="help-block text-danger">{{ $errors->first('title') }}</span>
             @endif
+            <label for="tools" class="dashboard_label">{{ __('product.tools') }}</label>
             <input type="text" name="tools" value="{{ $product->tools}}">
             @if($errors->has('tools'))
                 <span class="help-block text-danger">{{ $errors->first('tools') }}</span>
@@ -140,15 +143,15 @@
                                     <ul data-image-uploader-error-list></ul>
                                 </div>
                                 <h3 class="alert-title">
-                                    <b>Upload your images</b>
+                                    <b>{{__('account.upload_images_header')}}</b>
                                 </h3>
                                 <p class="alert-about">
-                                    Upload and update your product images
+                                    {{__('account.upload_images_desc')}}
                                 </p>
                                 <div style="margin-left: 50px;">
                                     <a data-image-uploader-button class="btn btn-primary btn-lg">
                                         <span class="glyphicon glyphicon-camera"></span>
-                                        Upload Images
+                                        {{__('account.upload')}}
                                     </a>
                                 </div>
                                 <input data-image-uploader class="hidden" type="file" name="images[]" id="fileToUpload" accept="image/*" capture=camera" multiple/>
@@ -164,16 +167,17 @@
                     <span class="help-block text-danger">{{ $errors->first('images') }}</span>
                 @endif
             </div>
+            <label for="videolink" class="dashboard_label">{{ __('product.video_link') }}</label>
             <input type="text" name="video_link" value="{{ $product->video_link}}">
             @if($errors->has('video_link'))
                 <span class="help-block text-danger">{{ $errors->first('video_link') }}</span>
             @endif
-
+            <label for="tags" class="dashboard_label">{{ __('product.tags') }}</label>
             <input type="text" name="tags" placeholder="tags" value="@foreach($product->tags as $tags) {{$tags }} @endforeach">
             @if($errors->has('tags'))
                 <span class="help-block text-danger">{{ $errors->first('tags') }}</span>
             @endif
-
+            <label for="category" class="dashboard_label">{{ __('product.category') }}</label>
            <select name="category">
                 <option velue="{{ $product->category }}">{{ $product->category }}</option>
                <option value="first">First</option>
@@ -183,15 +187,23 @@
             @if($errors->has('category'))
                 <span class="help-block text-danger">{{ $errors->first('category') }}</span>
             @endif
+            <label for="descen" class="dashboard_label">{{ __('product.descen') }}</label>
             <textarea name="desc_en">{{$product->Description['en']}} </textarea>
+            <label for="descit" class="dashboard_label">{{ __('product.descit') }}</label>
             <textarea name="desc_it">{{$product->Description['it'] }}</textarea>
+            <label for="descru" class="dashboard_label">{{ __('product.descru') }}</label>
             <textarea name="desc_ru">{{ $product->Description['ru'] }}</textarea>
+            <label for="descsp" class="dashboard_label">{{ __('product.descsp') }}</label>
             <textarea name="desc_sp">{{ $product->Description['sp'] }}</textarea>
+            <label for="descarm" class="dashboard_label">{{ __('product.descarm') }}</label>
             <textarea name="desc_arm">{{$product->Description['arm']}}</textarea>
 
+            <label for="desc_seo" class="dashboard_label">{{ __('product.desc_seo') }}</label>
             <input type="text" name="desc_seo" value="{{ $product->desc_seo }}">
+            <label for="seo_keyword" class="dashboard_label">{{ __('product.seo_keyword') }}</label>
             <input type="text" name="seo_keyword" value="{{$product->seo_keyword}}">
-            <input type="submit" class="waves-effect waves-light btn-small" value="update product">
+
+            <input type="submit" class="waves-effect waves-light btn-small" value="{{__('product.update_product')}}">
         </form>
         </div>
     </div>

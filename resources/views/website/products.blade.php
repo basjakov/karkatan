@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="container">
-        <h1 class="container_heading">Products</h1>
+        <h1 class="container_heading">{{__('app.Products')}}</h1>
         <div class="row scrollspy">
             @foreach($products as $product)
                 <div class="col s12 l4" >
@@ -18,7 +18,7 @@
                         <span class="tools_username">{{$product->title}}</span>
                         <span class="tools_position"></span>
                         <span class="tools_position">{{$product->tools}}</span>
-                        <a href="{{route('product.show',['id'=>$product->id,'name'=>$product->name])}}" class="btnmore">More</a>
+                        <a href="{{route('product.show',['id'=>$product->id,'name'=>$product->name])}}" class="btnmore">{{ __('app.more') }}</a>
                     </div>
                 </div>
             @endforeach

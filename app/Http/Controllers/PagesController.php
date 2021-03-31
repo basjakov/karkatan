@@ -12,7 +12,7 @@ class PagesController extends Controller
         return view('website.home');
     }
     public function Experts(){
-        $users = User::where('status','active')->paginate(15);
+        $users = User::where('status','expert')->paginate(15);
         return view('website.profiles',['users'=>$users]);
     }
     public function ShowExpert($username){

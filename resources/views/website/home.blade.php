@@ -6,11 +6,10 @@
     <section class="video-container">
         <video src="{{asset('video/production ID_4129702 .mp4')}}" autoplay loop playsinline></video>
         <div class="callout">
-            <h1>A background video</h1>
+            <h1>{{ __('app.home_header') }}</h1>
             <div>
-                <p>Object-Fit is the CSS Background-Size: Cover for Inline Images &amp; Videos.
-                    <br>It's not Microsoft friendly.</p>
-                <a class="waves-effect waves-light btn-large red lighten-2" href="https://codepen.io/DylanMacnab/pen/NjVXEe" target="_blank">Source</a>
+                <p>{{ __('app.home_headerdesc') }}</p>
+                <a class="waves-effect waves-light btn-large red lighten-2" href="https://codepen.io/DylanMacnab/pen/NjVXEe" target="_blank">{{ __('app.source') }}</a>
             </div>
         </div>
 

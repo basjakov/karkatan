@@ -14,9 +14,32 @@
                             <h2 class="name_lastnamepart">{{$user->name}} {{$user->lastname}}</h2>
                             <h5 class="username_profile"></h5>
                             <a href="{{route('product.create')}}" class="btn-floating btn-large pulse"><i class="material-icons">add_circle</i></a>
+
                             <p class="flow-text" style="font-size:16.5px;">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
 
                                 The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                            <div class="container">
+                                <div class="row valign-wrapper">
+                                    <div class="col s10 offset-s1 valign">
+                                        <div class="card blue-grey darken-1">
+                                            <div class="card-content white-text">
+                                                <span class="card-title">
+                                                    {{$order->project_name}}   </br>
+                                                    <span style="font-size: 16px;">{{$order->title}}</span>
+                                                </span>
+
+                                                <p>{{$order->description}}</p>
+                                                <div class="hide-on-small-only">To: {{$order->to}}</div>
+                                                <div class="hide-on-small-only">Finish: {{$order->finish}}</div>
+                                            </div>
+                                            <div class="card-action">
+                                                <a href="#">This is a link</a>
+                                                <a href="#">This is a link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col s11">
@@ -35,7 +58,7 @@
                                               {{ method_field('DELETE') }}
 
                                         </form>
-                                        <a href="{{route('product.edit',$product->id)}}" style="margin-left:40px;" class="btn waves-effect waves-light" type="submit" name="action">Edit<i class="material-icons right">border_color</i></a>
+                                        <a href="{{route('product.edit',$product->id)}}" style="margin-left:40px;" class="btn waves-effect waves-light" type="submit" name="action">{{__('account.edit')}}<i class="material-icons right">border_color</i></a>
                                         <a data-original-title="Delete" data-toggle="tooltip" title="" class="btn waves-effect waves-light red tooltips js-ajax-delete" onclick="deleteProduct()" href="javascript:void(0);"><i class="material-icons center">delete_sweep</i></a>
                                 @endforeach
                             </div>

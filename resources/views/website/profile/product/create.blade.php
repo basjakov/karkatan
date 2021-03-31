@@ -104,22 +104,25 @@
 @section('content')
     <div class="row">
         <div class="col s5">
-            <div class="center-align">
-
-            </div>
+                <div class="main_buttons">
+                    <a href="{{ route('dashboard') }}" class="waves-effect waves-light btn-small"><span class="material-icons" style="margin:5px;">arrow_back</span></a>
+                </div>
         </div>
         <div class="col s6">
             <form method="post" action="{{route('product.store')}}" enctype="multipart/form-data">
                 @csrf
-                <input type="text" name="name" value="name">
+                <label for="name" class="dashboard_label">{{ __('product.name') }}</label>
+                <input type="text" name="name" >
                 @if($errors->has('name'))
                     <span class="help-block text-danger">{{ $errors->first('name') }}</span>
                 @endif
-                <input type="text" name="title" placeholder="title">
+                <label for="title" class="dashboard_label">{{ __('product.title') }}</label>
+                <input type="text" name="title" placeholder="">
                 @if($errors->has('title'))
                     <span class="help-block text-danger">{{ $errors->first('title') }}</span>
                 @endif
-                <input type="text" name="tools" placeholder="tools">
+                <label for="tools" class="dashboard_label">{{ __('product.tools') }}</label>
+                <input type="text" name="tools" placeholder="">
                 @if($errors->has('tools'))
                     <span class="help-block text-danger">{{ $errors->first('tools') }}</span>
                 @endif
@@ -132,15 +135,15 @@
                                         <ul data-image-uploader-error-list></ul>
                                     </div>
                                     <h3 class="alert-title">
-                                        <b>Upload your images</b>
+                                        <b>{{__('account.upload_images_header')}}</b>
                                     </h3>
                                     <p class="alert-about">
-                                        You can upload your product pics!
+                                        {{__('account.upload_images_desc')}}
                                     </p>
                                     <div style="margin-left: 50px;">
                                         <a data-image-uploader-button class="btn btn-primary btn-lg">
                                             <span class="glyphicon glyphicon-camera"></span>
-                                            Upload Images
+                                            {{__('account.upload')}}
                                         </a>
                                     </div>
                                     <input data-image-uploader class="hidden" type="file" name="images[]" id="fileToUpload"  capture=camera" multiple/>
@@ -153,33 +156,40 @@
                         <span class="help-block text-danger">{{ $errors->first('images') }}</span>
                     @endif
                 </div>
-                <input type="text" name="video_link" placeholder="video link">
+                <label for="video_link" class="dashboard_label">{{ __('product.video_link') }}</label>
+                <input type="text" name="video_link" placeholder="">
                 @if($errors->has('video_link'))
                     <span class="help-block text-danger">{{ $errors->first('video_link') }}</span>
                 @endif
-
-                <input type="text" name="tags" placeholder="tags">
+                <label for="tags" class="dashboard_label">{{ __('product.tags') }}</label>
+                <input type="text" name="tags" placeholder="">
                 @if($errors->has('tags'))
                     <span class="help-block text-danger">{{ $errors->first('tags') }}</span>
                 @endif
+                <label for="category" class="dashboard_label">{{ __('product.category') }}</label>
 
-               <select name="category">
-                   <option value="first">First</option>
-                   <option value="">Second</option>
-                   <option value="">Tree</option>
-               </select>
-                @if($errors->has('category'))
-                    <span class="help-block text-danger">{{ $errors->first('category') }}</span>
-                @endif
+                <select name="category">
+                    <option value="first">First</option>
+                    <option value="">Second</option>
+                    <option value="">Tree</option>
+                </select>
+
+
+                <label for="desc_en" class="dashboard_label">{{ __('product.descen') }}</label>
                 <textarea name="desc_en"></textarea>
+                <label for="desc_ru" class="dashboard_label">{{ __('product.descru') }}</label>
                 <textarea name="desc_ru"></textarea>
+                <label for="desc_sp" class="dashboard_label">{{ __('product.descsp') }}</label>
                 <textarea name="desc_sp"></textarea>
+                <label for="desc_it" class="dashboard_label">{{ __('product.descit') }}</label>
                 <textarea name="desc_it"></textarea>
+                <label for="desc_arm" class="dashboard_label">{{ __('product.descarm') }}</label>
                 <textarea name="desc_arm"></textarea>
-
+                <label for="desc_seo" class="dashboard_label">{{ __('product.desc_seo') }}</label>
                 <input type="text" name="desc_seo">
+                <label for="seo_keyword" class="dashboard_label">{{ __('product.seo_keyword') }}</label>
                 <input type="text" name="seo_keyword">
-                <input type="submit" value="Make product">
+                <input type="submit" class="waves-effect waves-light btn-small" value="{{__('product.create_product')}}">
             </form>
         </div>
 @endsection

@@ -11,6 +11,12 @@ nav{
     height: 800px;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-size: 1.0rem;
+    color: #2bbbad;
+    font-weight: 600;
+    opacity: 95%;
+}
 
 #home {
   color:white;
@@ -262,4 +268,9 @@ h1 {
 }
 .brand-logo{
     margin-left:1em;
+}
+.dashboard_label{
+    font-size: 1.2rem;
+    color: #2bbbad;
+    font-weight: 600;
 }

@@ -20,29 +20,33 @@
                                 @endforeach
                             </div>
                         @endif
-                        <input type="text" name="name" placeholder="name">
-                        <input type="text" name="lastname" placeholder="lastname">
-                        <input type="text" name="username" placeholder="username">
-                        <input type="text" name="email" placeholder="email">
+                        <input type="text" name="name" placeholder="{{ __('account.name')}}">
+                        <input type="text" name="lastname" placeholder="{{ __('account.lastname')}}">
+                        <input type="text" name="username" placeholder="{{ __('account.username')}}">
+                        <input type="text" name="email" placeholder="{{ __('account.email')}}">
 
-                        <input type="password" name="password" placeholder="password">
-                        <input type="text" name="position" placeholder="postition">
-                        <input type="text" name="country" placeholder="country">
-                        <input type="text" name="region" placeholder="region">
+                        <input type="password" name="password" placeholder="{{ __('account.password')}}">
+                        <input type="password"  placeholder="{{ __('account.confirmpassword')}}">
 
-                        <input type="text" name="city" placeholder="city">
-                        <input type="text" name="address" placeholder="address">
+                        <input type="text" name="position" placeholder="{{ __('account.position')}}">
+                        <input type="text" name="country" placeholder="{{ __('account.country')}}">
+                        <input type="text" name="region" placeholder="{{ __('account.region')}}">
 
-                        <input type="text" name="zipcode" placeholder="zipcode">
-                        <input type="file" name="profile_image">
-                        <textarea name="descriptionen" ></textarea>
-                        <textarea name="descriptionru" ></textarea>
-                        <textarea name="descriptionsp" ></textarea>
-                        <textarea name="descriptionit" ></textarea>
-                        <textarea name="descriptionfr" ></textarea>
-                        <textarea name="descriptionarm" ></textarea>
+                        <input type="text" name="city" placeholder="{{ __('account.city')}}">
+                        <input type="text" name="address" placeholder="{{ __('account.address')}}">
 
-                        <input type="submit" class="btn-large waves-effect waves-dark" value="Create account">
+                        <input type="text" name="zipcode" placeholder="{{ __('account.zipcode')}}">
+                        <label for="profile_image">{{ __('account.avatar')}}</label>
+                        <input type="file" name="profile_image"></br>
+                        <label for="description">{{ __('account.description')}}</label>
+                        <textarea name="descriptionen" placeholder="{{ __('account.descriptionen')}}"></textarea>
+                        <textarea name="descriptionru" placeholder="{{ __('account.descriptionru')}}"></textarea>
+                        <textarea name="descriptionsp" placeholder="{{ __('account.descriptionsp')}}"></textarea>
+                        <textarea name="descriptionit" placeholder="{{ __('account.descriptionit')}}"></textarea>
+                        <textarea name="descriptionfr" placeholder="{{ __('account.descriptionfr')}}"></textarea>
+                        <textarea name="descriptionarm" placeholder="{{ __('account.descriptionarm')}}"></textarea>
+
+                        <input type="submit" class="btn-large waves-effect waves-dark" value="{{ __('account.create_account')}}">
 
                     </form>
         </div>

@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 <div class="container">
-    <h1 class="container_heading">Experts</h1>
+    <h1 class="container_heading">{{__('app.Experts')}}</h1>
     <div class="row scrollspy">
         @foreach($users as $user)
         <div class="col s12 l4" >
@@ -17,7 +17,7 @@
                 <span class="tools_username">@|{{$user->username}}</span>
                 <span class="tools_position">{{$user->position}}</span>
                 <span class="tools_position">{{$user->country}}</span>
-                <a href="{{route('expert.show',$user->username)}}" class="btnmore">More</a>
+                <a href="{{route('expert.show',$user->username)}}" class="btnmore">{{ __('app.more') }}</a>
             </div>
         </div>
         @endforeach

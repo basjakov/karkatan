@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <!--Import Google Icon Font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link type="text/css" rel="stylesheet" href="{{asset('css/materialize.min.css')}}"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}" />
     <!--Let browser know website is optimized for mobile-->
@@ -25,6 +25,32 @@
 <body>
 <div @yield('maindivid')>
     <header>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                @php $locale = session()->get('locale'); @endphp
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        @switch($locale)
+                            @case('en')
+                            <img src="{{asset('img/us.png')}}"> English
+                            @break
+                            @case('hy')
+                            <img src="{{asset('img/bn.png')}}"> Armenian
+                            @break
+                        @endswitch
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="lang/en"><img src="{{asset('img/us.png')}}"> English</a>
+                        <a class="dropdown-item" href="lang/hy"><img src="{{asset('img/bn.png')}}"> Armenian</a>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
         <nav>
             <div class="container-fluid">
                 <div class="nav-wrapper">
@@ -35,15 +61,15 @@
                     </a>
 
                     <ul class="right hide-on-med-and-down menuitems" >
-                        <li><a href="{{route('products')}}">Products</a></li>
-                        <li><a href="{{route('experts')}}">Experts</a></li>
+                        <li><a href="{{route('products')}}">{{ __('app.Products') }}</a></li>
+                        <li><a href="{{route('experts')}}">{{ __('app.Experts') }}</a></li>
                         <li><a href=""></a></li>
                         @if (!Auth::check())
-                        <li><a href="{{route('login')}}">Login</a></li>
-                        <li><a href="{{route('makeaccount')}}">Register</a></li>
+                        <li><a href="{{route('login')}}">{{ __('app.Login') }}</a></li>
+                        <li><a href="{{route('makeaccount')}}">{{ __('app.Register') }}</a></li>
                         @else
                             <li><a href="{{route('dashboard')}}">{{Auth::user()->username}}</a></li>
-                            <li><a href="{{route('logout')}}">Logout</a></li>
+                            <li><a href="{{route('logout')}}">{{ __('app.Logout') }}</a></li>
                         @endif
                     </ul>
                 </div>
@@ -52,11 +78,11 @@
     </header>
 
     <ul class="right sidenav" id="mobile-nav">
-        <li><a href="{{route('products')}}">Products</a></li>
-        <li><a href="{{route('experts')}}">Experts</a></li>
+        <li><a href="{{route('products')}}">{{ __('app.Products') }}</a></li>
+        <li><a href="{{route('experts')}}">{{ __('app.Experts') }}</a></li>
         <li><a href="#"></a></li>
-        <li><a href="#">Login</a></li>
-        <li><a href="{{route('makeaccount')}}">Register</a></li>
+        <li><a href="{{route('login')}}">{{ __('app.Login') }}</a></li>
+        <li><a href="{{route('makeaccount')}}">{{ __('app.Register') }}</a></li>
     </ul>
 
     @yield('searchbox')
@@ -68,6 +94,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('.sidenav').sidenav();
+        $('select').formSelect();
     });
 </script>
 @yield('js')
