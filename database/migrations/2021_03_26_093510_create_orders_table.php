@@ -17,7 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('project_name');
             $table->integer('expert_id');
-            $table->enum('status', ['offer', 'ongoing','finish','delivery','completed']);
+            $table->integer('client_id');
+            $table->enum('status', ['offer', 'ongoing','finish','delivery','completed','canceled']);
             $table->string('title');
             $table->longtext('description');
             $table->string('filename');

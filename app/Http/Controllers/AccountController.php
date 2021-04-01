@@ -57,8 +57,8 @@ class AccountController extends Controller
             $userid = Auth::user()->id;
             $products = Product::paginate(30);
             $user = User::find($userid);
-            $order = order::where('expert_id',Auth::user()->id)->get();
-            return view('website.profile.dashboard',['user'=>$user,'products'=>$products,'order'=>$order->first()]);
+            $orders = order::where('expert_id',Auth::user()->id)->paginate();
+            return view('website.profile.dashboard',['user'=>$user,'products'=>$products,'orders'=>$orders]);
     }
     public function show($id){
         $user = User::find($id);

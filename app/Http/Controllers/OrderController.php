@@ -6,7 +6,7 @@ use App\Http\Requests\orderOfferRequest;
 use App\Models\order;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     /**
@@ -47,6 +47,42 @@ class OrderController extends Controller
         $order->sendOffer($request,$order);
         return redirect('/dashboard');
     }
+    public function acceptOffer($id){
+        $order = order::findOrFail($id);
+        if(Auth::user()->id == $order->expert_id){
+            $order->acceptOffer($id);
+        }
+        return redirect()->back();
+    }
+    public function finishTask($id){
+        $order = order::findOrFail($id);
+        if(Auth::user()->id == $order->expert_id) {
+            $order->finishTask($id);
+        }
+        return redirect()->back();
+    }
+    public function delivery($id){
+        $order = order::findOrFail($id);
+        if(Auth::user()->id == $order->expert_id) {
+            $order->delivery($id);
+        }
+        return redirect()->back();
+    }
+    public function completed($id){
+        $order = order::findOrFail($id);
+        if(Auth::user()->id == $order->expert_id) {
+            $order->completed($id);
+        }
+        return redirect()->back();
+    }
+    public function canceled(){
+        $expert_id = Auth::user()->id;
+        $order = order::findOrFail($expert_id);
+        $order->canceled($expert_id);
+        return redirect()->back();
+    }
+
+
     /**
      * Display the specified resource.
      *

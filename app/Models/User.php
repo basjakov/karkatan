@@ -70,4 +70,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function order(){
+        return $this->hasOne('app\Models\User','client_id','id');
+    }
 }

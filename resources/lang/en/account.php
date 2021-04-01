@@ -35,6 +35,15 @@
         //edit product
         'upload_images_header'=>'Upload your images',
         'upload_images_desc'=>'Upload and update your product images',
-        'upload'=>'upload'
+        'upload'=>'upload',
+        //dashboard
+        'offer'=>'Our Offer',
+        'accept'=>'Accept offer',
+        'reject'=>'Reject',
+        'ongoing'=>'Ongoing',
+        'Finish'=>'Finished',
+        'delivery'=>'Delivery',
+        'completed'=>'Completed',
+        'canceled'=>'Canceled'
     ]
 ?>

@@ -21,6 +21,13 @@ use App\Http\Controllers\OrderController;
         Route::delete('/product/imagedestroy/{id}',[ProductController::class,'DestroyImage'])->name('product.destroyimage');
         Route::get('/order/create/{profile_id}',[OrderController::class,'create'])->name('order.create');
         Route::post('/order/create',[OrderController::class,'sendOffer'])->name('order.offer');
+        Route::post('/order/acceptoffer/{id}',[OrderController::class,'acceptOffer'])->name('order.acceptOffer');
+        Route::post('/order/finishtask/{id}',[OrderController::class,'finishtask'])->name('order.finishtask');
+
+        Route::post('/order/delivery/{id}',[OrderController::class,'delivery'])->name('order.delivery');
+        Route::post('/order/completed/{id}',[OrderController::class,'completed'])->name('order.completed');
+        Route::post('/order/canceled/{id}',[OrderController::class,'canceled'])->name('order.canceled');
+
     });
 
 

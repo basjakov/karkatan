@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Mail\AcceptOffer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OfferOrderTask;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +17,7 @@ class order extends Model
     protected $fillable = [
         'project_name',
         'expert_id',
+        'client_id',
         'status',
         'title',
         'description',
@@ -31,7 +34,7 @@ class order extends Model
         $order->status = "offer";
         $order->title = $validated['title'];
         $order->description = $validated['description'];
-
+        $order->client_id = Auth::user()->id;
         if ($validated['filename']) {
             $file = $validated['filename'];
             $order_photo_url = Storage::disk('local')->putFile("/public/order/$order->expert_id/$order->project_name", $file);
@@ -52,8 +55,48 @@ class order extends Model
         Mail::to($expert_email[0])->send(new OfferOrderTask($details));
     }
     public function acceptOffer($expert_id){
+
         $order = order::findorfail($expert_id);
         $order->status = "ongoing";
         $order->update();
+        $expert_email = User::select('email')->where('id',$expert_id)->pluck('email')->first();
+        //Send email in expert
+//        $details = [
+//            'body' => 'Ձեր պատվերը հաստատվել է,խնդրում ենք այն կատարել  Նշված ժամանակահատվածում',
+//            'to'=>$order->to,
+//            'finish'=>$order->finish
+//        ];
+//        Mail::to($expert_email)->send(new OfferOrderTask($details));
+//        //Send email in client
+//        $client_email = User::select('email')->where('id',$order->client_id)->pluck('email')->first();
+//        $details2 = [
+//            'body' => 'Ձեր պատվերը հաստատվել է,խնդրում ենք այն կատարել  Նշված ժամանակահատվածում',
+//            'to'=>$order->to,
+//            'finish'=>$order->finish
+//        ];
+//        Mail::to($client_email)->send(new AcceptOffer($details2));
+    }
+    public function finishTask($expert_id){
+        $order = order::findorfail($expert_id);
+        $order->status = "finish";
+        $order->update();
+    }
+    public function delivery($expert_id){
+        $order = order::findorfail($expert_id);
+        $order->status = "delivery";
+        $order->update();
+    }
+    public function completed($expert_id){
+        $order = order::findorfail($expert_id);
+        $order->status = "completed";
+        $order->update();
+    }
+    public function canceled($expert_id){
+        $order = order::findorfail($expert_id);
+        $order->status = "canceled";
+        $order->update();
+    }
+    public function  User(){
+        return $this->belongsTo('app\models\User','client_id','id');
     }
 }

@@ -19,26 +19,73 @@
 
                                 The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
                             <div class="container">
-                                <div class="row valign-wrapper">
-                                    <div class="col s10 offset-s1 valign">
-                                        <div class="card blue-grey darken-1">
-                                            <div class="card-content white-text">
-                                                <span class="card-title">
-                                                    {{$order->project_name}}   </br>
-                                                    <span style="font-size: 16px;">{{$order->title}}</span>
-                                                </span>
+                                @foreach($orders as $order)
 
-                                                <p>{{$order->description}}</p>
-                                                <div class="hide-on-small-only">To: {{$order->to}}</div>
-                                                <div class="hide-on-small-only">Finish: {{$order->finish}}</div>
-                                            </div>
-                                            <div class="card-action">
-                                                <a href="#">This is a link</a>
-                                                <a href="#">This is a link</a>
+                                    @if($order->status == 'offer')
+                                        <form id="acceptOffer{{$order->id}}" method="post" action="{{route('order.acceptOffer',$order->id)}}">
+                                            @csrf
+                                        </form>
+                                    @endif
+                                    @if($order->status == 'ongoing')
+                                            <form id="finishtask{{$order->id}}" method="post" action="{{route('order.finishtask',$order->id)}}">
+                                                @csrf
+                                            </form>
+                                    @endif
+                                    @if($order->status =='finish')
+                                            <form id="deliverytask{{$order->id}}" method="post" action="{{route('order.delivery',$order->id)}}">
+                                                @csrf
+                                            </form>
+                                    @endif
+
+
+                                        <div class="row valign-wrapper">
+                                        <div class="col s10 offset-s1 valign">
+                                            <div class="card blue-grey darken-1">
+                                                <div class="card-content white-text">
+                                                    <span class="card-title">
+                                                        <span style="font-size: 16px;">{{$order->status}}</span>
+                                                        {{$order->project_name}}   </br>
+                                                        <span style="font-size: 16px;">{{$order->title}}</span>
+                                                    </span>
+
+                                                    <p>{{$order->description}}</p>
+                                                    <div class="hide-on-small-only">To: {{$order->to}}</div>
+                                                    <div class="hide-on-small-only">Finish: {{$order->finish}}</div>
+                                                </div>
+                                                <div class="card-action">
+                                                    @if($order->status == 'offer')
+                                                        <a onclick="acceptOffer{{$order->id}}()" href="javascript:void(0);">{{__('account.accept')}}</a>
+                                                        <a href="#">{{__('account.reject')}}</a>
+                                                    @endif
+                                                    @if($order->status == 'ongoing')
+                                                            <a onclick="finishtask{{$order->id}}()" href="javascript:void(0);">{{__('account.Finish')}}</a>
+                                                    @endif
+                                                    @if($order->status=='finish')
+                                                            <a onclick="deliverytask{{$order->id}}()" href="javascript:void(0);">{{__('account.delivery')}}</a>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <script type="text/javascript">
+                                        @if($order->status == 'offer')
+                                            function acceptOffer{{$order->id}}(){
+                                                    document.getElementById("acceptOffer{{$order->id}}").submit();
+                                            }
+                                        @endif
+                                        @if($order->status == 'ongoing')
+                                            function finishtask{{$order->id}}(){
+                                                document.getElementById("finishtask{{$order->id}}").submit();
+                                            }
+                                        @endif
+                                        @if($order->status == 'finish')
+                                            function deliverytask{{$order->id}}(){
+                                                document.getElementById("deliverytask{{$order->id}}").submit();
+                                            }
+                                        @endif
+                                        
+                                    </script>
+                                @endforeach
                             </div>
                         </div>
                     </div>
