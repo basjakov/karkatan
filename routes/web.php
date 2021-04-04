@@ -7,7 +7,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\OrderController;
 
-    Route::get('lang/{locale}', [LocalizationController::class,'index']);
+    Route::get('lang/{locale}', [LocalizationController::class,'index'])->name('lang');
 
     Route::get('/',[PagesController::class,'Home'])->name('home');
 

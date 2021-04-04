@@ -70,7 +70,7 @@ class OrderController extends Controller
     }
     public function completed($id){
         $order = order::findOrFail($id);
-        if(Auth::user()->id == $order->expert_id) {
+        if(Auth::user()->id == $order->client_id) {
             $order->completed($id);
         }
         return redirect()->back();

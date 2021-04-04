@@ -66,6 +66,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <script type="text/javascript">
                                         @if($order->status == 'offer')
@@ -83,9 +84,51 @@
                                                 document.getElementById("deliverytask{{$order->id}}").submit();
                                             }
                                         @endif
-                                        
                                     </script>
                                 @endforeach
+                            </div>
+                            <h2>My ordered tasks</h2>
+                            <div class="container">
+
+
+                                    @foreach($tasks as $task)
+                                        @if($task->status == 'delivery')
+                                            <form id="complatetask{{$task->id}}" method="post" action="{{route('order.delivery',$task->id)}}">
+                                                @csrf
+                                            </form>
+                                        @endif
+                                        <div class="row valign-wrapper">
+                                            <div class="col s10 offset-s1 valign">
+                                                <div class="card blue-grey darken-1">
+                                                    <div class="card-content white-text">
+                                                        <span class="card-title">
+                                                            <span style="font-size: 16px;">{{$task->status}}</span>
+                                                            {{$task->project_name}}   </br>
+                                                            <span style="font-size: 16px;">{{$task->title}}</span>
+                                                        </span>
+
+                                                        <p>{{$task->description}}</p>
+                                                        <div class="hide-on-small-only">To: {{$task->to}}</div>
+                                                        <div class="hide-on-small-only">Finish: {{$task->finish}}</div>
+                                                    </div>
+                                                    <div class="card-action">
+                                                           @if($task->status == 'delivery')
+                                                                <a onclick="complatetask{{$task->id}}()" href="javascript:void(0);">{{__("account.completed")}} </a>
+                                                            @endif
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <script type="text/javascript">
+
+                                            function complatetask{{$task->id}}(){
+                                                document.getElementById("complatetask{{$task->id}}").submit();
+                                            }
+                                        </script>
+                                    @endforeach
+
                             </div>
                         </div>
                     </div>

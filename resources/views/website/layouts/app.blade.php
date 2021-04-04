@@ -25,6 +25,57 @@
 <body>
 <div @yield('maindivid')>
     <header>
+
+        <nav>
+            <div class="container-fluid">
+                <div class="nav-wrapper">
+                    <a href="{{url('/')}}" class="brand-logo">Karkatan</a>
+
+                    <a href="#" class="right sidenav-trigger" data-target="mobile-nav">
+                        <i class="material-icons">menu</i>
+                    </a>
+
+                    <ul class="right hide-on-med-and-down menuitems" >
+                        <li><a href="{{route('products')}}">{{ __('app.Products') }}</a></li>
+                        <li><a href="{{route('experts')}}">{{ __('app.Experts') }}</a></li>
+                        <li><a href=""></a></li>
+                        @if (!Auth::check())
+                        <li><a href="{{route('login')}}">{{ __('app.Login') }}</a></li>
+                        <li><a href="{{route('makeaccount')}}">{{ __('app.Register') }}</a></li>
+                        @else
+                            <li><a href="{{route('dashboard')}}">{{Auth::user()->username}}</a></li>
+                            <li><a href="{{route('logout')}}">{{ __('app.Logout') }}</a></li>
+                        @endif
+                        @php $locale = session()->get('locale'); @endphp
+                        <button class='dropdown-trigger  lang_sw'  data-target='dropdown1'>
+                            @switch($locale)
+                                @case('en')
+                                    EN
+                                @break
+                                @case('hy')
+                                    ARM
+                                @break
+                            @endswitch
+                        </button>
+
+                        <!-- Dropdown Structure -->
+                        <ul id='dropdown1' class='dropdown-content'>
+                            <li><a href="{{route('lang','en')}}">Eng</a></li>
+                            <li><a href="{{route('lang','hy')}}">Arm</a></li>
+                        </ul>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <ul class="right sidenav" id="mobile-nav">
+        <li><a href="{{route('products')}}">{{ __('app.Products') }}</a></li>
+        <li><a href="{{route('experts')}}">{{ __('app.Experts') }}</a></li>
+        <li><a href="#"></a></li>
+        <li><a href="{{route('login')}}">{{ __('app.Login') }}</a></li>
+        <li><a href="{{route('makeaccount')}}">{{ __('app.Register') }}</a></li>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -51,38 +102,6 @@
                 </li>
             </ul>
         </div>
-        <nav>
-            <div class="container-fluid">
-                <div class="nav-wrapper">
-                    <a href="{{url('/')}}" class="brand-logo">Karkatan</a>
-
-                    <a href="#" class="right sidenav-trigger" data-target="mobile-nav">
-                        <i class="material-icons">menu</i>
-                    </a>
-
-                    <ul class="right hide-on-med-and-down menuitems" >
-                        <li><a href="{{route('products')}}">{{ __('app.Products') }}</a></li>
-                        <li><a href="{{route('experts')}}">{{ __('app.Experts') }}</a></li>
-                        <li><a href=""></a></li>
-                        @if (!Auth::check())
-                        <li><a href="{{route('login')}}">{{ __('app.Login') }}</a></li>
-                        <li><a href="{{route('makeaccount')}}">{{ __('app.Register') }}</a></li>
-                        @else
-                            <li><a href="{{route('dashboard')}}">{{Auth::user()->username}}</a></li>
-                            <li><a href="{{route('logout')}}">{{ __('app.Logout') }}</a></li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <ul class="right sidenav" id="mobile-nav">
-        <li><a href="{{route('products')}}">{{ __('app.Products') }}</a></li>
-        <li><a href="{{route('experts')}}">{{ __('app.Experts') }}</a></li>
-        <li><a href="#"></a></li>
-        <li><a href="{{route('login')}}">{{ __('app.Login') }}</a></li>
-        <li><a href="{{route('makeaccount')}}">{{ __('app.Register') }}</a></li>
     </ul>
 
     @yield('searchbox')
@@ -93,9 +112,53 @@
 <script type="text/javascript" src="{{asset('js/materialize.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        $('.dropdown-trigger').dropdown();
         $('.sidenav').sidenav();
         $('select').formSelect();
     });
+    let el = $(".switch");
+    let cur = el.find(".current");
+    let options = el.find(".options li");
+    let content = $("#content");
+
+    // Open language dropdown panel
+
+    el.on("click", function (e) {
+        el.addClass("show-options");
+
+        setTimeout(function () {
+            el.addClass("anim-options");
+        }, 50);
+
+        setTimeout(function () {
+            el.addClass("show-shadow");
+        }, 200);
+    });
+
+    // Close language dropdown panel
+
+    options.on("click", function (e) {
+        e.stopPropagation();
+        el.removeClass("anim-options");
+        el.removeClass("show-shadow");
+
+        let newLang = $(this).data("lang");
+
+        cur.find("span").text(newLang);
+        content.attr("class", newLang);
+
+        setLang(newLang);
+
+        options.removeClass("selected");
+        $(this).addClass("selected");
+
+        setTimeout(function () {
+            el.removeClass("show-options");
+        }, 600);
+    });
+
+
+
 </script>
 @yield('js')
 </body>
