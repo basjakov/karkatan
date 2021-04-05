@@ -319,3 +319,52 @@ h1 {
     background: #3aa3f4;
 }
 
+
+.completed_title{
+    width:150px;
+    margin:auto;
+    font-size: 18px;
+    display: block;
+    text-transform: uppercase;
+    background: #039be5;
+}
+.delivery_title{
+    width:150px;
+    margin:auto;
+    font-size: 18px;
+    display: block;
+    text-transform: uppercase;
+    background: #039be5;
+}
+.finish_title{
+    width:150px;
+    margin:auto;
+    font-size: 18px;
+    display: block;
+    text-transform: uppercase;
+    background: #7df132;
+}
+.ongoing_title{
+    width:150px;
+    margin:auto;
+    font-size: 18px;
+    display: block;
+    text-transform: uppercase;
+    background: #efac42;
+}
+.accepted_title{
+    width:150px;
+    margin:auto;
+    font-size: 18px;
+    display: block;
+    text-transform: uppercase;
+    background: #7df132;
+}
+.offer_title{
+    width:150px;
+    margin:auto;
+    font-size: 18px;
+    display: block;
+    text-transform: uppercase;
+    background: #26a69a;
+}

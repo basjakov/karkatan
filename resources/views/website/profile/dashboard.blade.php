@@ -43,8 +43,26 @@
                                             <div class="card blue-grey darken-1">
                                                 <div class="card-content white-text">
                                                     <span class="card-title">
-                                                        <span style="font-size: 16px;">{{$order->status}}</span>
-                                                        {{$order->project_name}}   </br>
+                                                        @if($order->status == 'offer')
+                                                            <span class="offer_title" >{{$order->status}}</span>
+                                                        @endif
+                                                        @if($order->status == 'accepted')
+                                                            <span class="accepted_title" >{{$order->status}}</span>
+                                                        @endif
+                                                        @if($order->status == 'ongoing')
+                                                            <span class="ongoing_title" >{{$order->status}}</span>
+                                                        @endif
+                                                        @if($order->status == 'finish')
+                                                            <span class="finish_title" >{{$order->status}}</span>
+                                                        @endif
+                                                        @if($order->status == 'delivery')
+                                                            <span class="delivery_title" >{{$order->status}}</span>
+                                                        @endif
+                                                        @if($order->status == 'completed')
+                                                            <span class="completed_title" >{{$order->status}}</span>
+                                                        @endif
+
+                                                            {{$order->project_name}}   </br>
                                                         <span style="font-size: 16px;">{{$order->title}}</span>
                                                     </span>
 
@@ -53,6 +71,8 @@
                                                     <div class="hide-on-small-only">Finish: {{$order->finish}}</div>
                                                 </div>
                                                 <div class="card-action">
+
+
                                                     @if($order->status == 'offer')
                                                         <a onclick="acceptOffer{{$order->id}}()" href="javascript:void(0);">{{__('account.accept')}}</a>
                                                         <a href="#">{{__('account.reject')}}</a>
@@ -93,7 +113,7 @@
 
                                     @foreach($tasks as $task)
                                         @if($task->status == 'delivery')
-                                            <form id="complatetask{{$task->id}}" method="post" action="{{route('order.delivery',$task->id)}}">
+                                            <form id="complatetask{{$task->id}}" method="post" action="{{route('order.completed',$task->id)}}">
                                                 @csrf
                                             </form>
                                         @endif
@@ -102,7 +122,24 @@
                                                 <div class="card blue-grey darken-1">
                                                     <div class="card-content white-text">
                                                         <span class="card-title">
-                                                            <span style="font-size: 16px;">{{$task->status}}</span>
+                                                            @if($task->status == 'offer')
+                                                                <span class="offer_title" >{{$task->status}}</span>
+                                                            @endif
+                                                            @if($task->status == 'accepted')
+                                                                    <span class="accepted_title" >{{$task->status}}</span>
+                                                            @endif
+                                                            @if($task->status == 'ongoing')
+                                                                    <span class="ongoing_title" >{{$task->status}}</span>
+                                                            @endif
+                                                            @if($task->status == 'finish')
+                                                                <span class="finish_title" >{{$task->status}}</span>
+                                                            @endif
+                                                            @if($task->status == 'delivery')
+                                                                    <span class="delivery_title" >{{$task->status}}</span>
+                                                            @endif
+                                                            @if($task->status == 'completed')
+                                                                    <span class="completed_title" >{{$task->status}}</span>
+                                                            @endif
                                                             {{$task->project_name}}   </br>
                                                             <span style="font-size: 16px;">{{$task->title}}</span>
                                                         </span>

@@ -20,8 +20,9 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
-        "livewire/livewire": "^2.0"
-
+        "livewire/livewire": "^2.0",
+        "munafio/chatify": "^1.0",
+        "pusher/pusher-php-server": "4.0.*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

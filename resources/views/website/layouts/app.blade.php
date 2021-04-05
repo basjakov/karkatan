@@ -55,6 +55,9 @@
                                 @case('hy')
                                     ARM
                                 @break
+                                @default
+                                    EN
+                                @break
                             @endswitch
                         </button>
 

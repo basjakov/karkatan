@@ -54,12 +54,10 @@ class order extends Model
         ];
         Mail::to($expert_email[0])->send(new OfferOrderTask($details));
     }
-    public function acceptOffer($expert_id){
-
-        $order = order::findorfail($expert_id);
+    public function acceptOffer($order){
         $order->status = "ongoing";
         $order->update();
-        $expert_email = User::select('email')->where('id',$expert_id)->pluck('email')->first();
+        $expert_email = User::select('email')->where('id',$order->id)->pluck('email')->first();
         //Send email in expert
 //        $details = [
 //            'body' => 'Ձեր պատվերը հաստատվել է,խնդրում ենք այն կատարել  Նշված ժամանակահատվածում',
@@ -76,18 +74,15 @@ class order extends Model
 //        ];
 //        Mail::to($client_email)->send(new AcceptOffer($details2));
     }
-    public function finishTask($expert_id){
-        $order = order::findorfail($expert_id);
+    public function finishTask($order){
         $order->status = "finish";
         $order->update();
     }
-    public function delivery($expert_id){
-        $order = order::findorfail($expert_id);
+    public function delivery($order){
         $order->status = "delivery";
         $order->update();
     }
-    public function completed($expert_id){
-        $order = order::findorfail($expert_id);
+    public function completed($order){
         $order->status = "completed";
         $order->update();
     }

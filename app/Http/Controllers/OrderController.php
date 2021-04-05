@@ -50,35 +50,35 @@ class OrderController extends Controller
     public function acceptOffer($id){
         $order = order::findOrFail($id);
         if(Auth::user()->id == $order->expert_id){
-            $order->acceptOffer($id);
+            $order->acceptOffer($order);
         }
         return redirect()->back();
     }
     public function finishTask($id){
         $order = order::findOrFail($id);
         if(Auth::user()->id == $order->expert_id) {
-            $order->finishTask($id);
+            $order->finishTask($order);
         }
         return redirect()->back();
     }
     public function delivery($id){
         $order = order::findOrFail($id);
         if(Auth::user()->id == $order->expert_id) {
-            $order->delivery($id);
+            $order->delivery($order);
         }
         return redirect()->back();
     }
     public function completed($id){
         $order = order::findOrFail($id);
         if(Auth::user()->id == $order->client_id) {
-            $order->completed($id);
+            $order->completed($order);
         }
         return redirect()->back();
     }
     public function canceled(){
         $expert_id = Auth::user()->id;
         $order = order::findOrFail($expert_id);
-        $order->canceled($expert_id);
+        $order->canceled($order);
         return redirect()->back();
     }
 
