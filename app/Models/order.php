@@ -74,6 +74,24 @@ class order extends Model
 //        ];
 //        Mail::to($client_email)->send(new AcceptOffer($details2));
     }
+    public function  rejectOffer($order){
+        $folder_path = 'storage/order/'.$order->expert_id.'/'.$order->project_name;
+
+        $files = glob($folder_path.'/*');
+
+        // Deleting all the files in the list
+        foreach($files as $file) {
+
+            if(is_file($file))
+
+                // Delete the given file
+                unlink($file);
+        }
+        rmdir('storage/order/'.$order->expert_id.'/'.$order->project_name.'/');
+
+
+        $order->delete();
+    }
     public function finishTask($order){
         $order->status = "finish";
         $order->update();

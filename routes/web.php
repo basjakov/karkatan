@@ -24,6 +24,7 @@ use App\Http\Controllers\VacanciesController;
         Route::get('/order/create/{profile_id}',[OrderController::class,'create'])->name('order.create');
         Route::post('/order/create',[OrderController::class,'sendOffer'])->name('order.offer');
         Route::post('/order/acceptoffer/{id}',[OrderController::class,'acceptOffer'])->name('order.acceptOffer');
+        Route::delete('/order/rejectoffer/{id}',[OrderController::class,'rejectOffer'])->name('order.reject');
         Route::post('/order/finishtask/{id}',[OrderController::class,'finishtask'])->name('order.finishtask');
         Route::post('/order/delivery/{id}',[OrderController::class,'delivery'])->name('order.delivery');
         Route::post('/order/completed/{id}',[OrderController::class,'completed'])->name('order.completed');

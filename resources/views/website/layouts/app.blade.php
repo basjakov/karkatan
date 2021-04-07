@@ -124,9 +124,9 @@
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="{{route('products')}}">{{ __('app.Products') }}</a></li>
                         <li><a class="grey-text text-lighten-3" href="{{route('experts')}}">{{ __('app.Experts') }}</a></li>
-                        <li><a class="grey-text text-lighten-3" href="{{route('experts')}}">{{ __('app.terms_of_servie') }}</a></li>
-                        <li><a class="grey-text text-lighten-3" href="{{route('experts')}}">{{ __('app.vacancies') }}</a></li>
-                        <li><a class="grey-text text-lighten-3" href="{{route('experts')}}">{{ __('app.sitemap') }}</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{{route('terms')}}">{{ __('app.terms_of_servie') }}</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{{route('vacancies')}}">{{ __('app.vacancies') }}</a></li>
+                        <li><a class="grey-text text-lighten-3" href="sitemap.xml">{{ __('app.sitemap') }}</a></li>
                         <li><a class="grey-text text-lighten-3" href=""></a></li>
 
                     </ul>

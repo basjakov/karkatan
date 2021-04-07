@@ -38,12 +38,17 @@
         'upload'=>'upload',
         //dashboard
         'offer'=>'Our Offer',
+        'offer_message'=>'You confirm that you want to accept the offer',
+        'my_products'=>'My products',
         'accept'=>'Accept offer',
         'reject'=>'Reject',
         'ongoing'=>'Ongoing',
+        'ongoing_message'=>'You confirm that you finished order',
         'Finish'=>'Finished',
+        'finish_message'=>'Please make the delivery on time',
         'delivery'=>'Delivery',
         'completed'=>'Completed',
-        'canceled'=>'Canceled'
+        'canceled'=>'Canceled',
+        'My_ordered_tasks'=>'My ordered tasks',
     ]
 ?>

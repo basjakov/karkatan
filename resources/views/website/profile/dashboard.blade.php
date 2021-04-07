@@ -13,16 +13,61 @@
                             <h2 class="name_lastnamepart">{{$user->name}} {{$user->lastname}}</h2>
                             <h5 class="username_profile"></h5>
                             <a href="{{route('product.create')}}" class="btn-floating btn-large pulse"><i class="material-icons">add_circle</i></a>
+                            <div class="col s12">
+                                <h2 class="container_heading">{{__('account.my_products')}}</h2>
+                                <div class="gallery">
+                                    <div class="grid">
+                                        @foreach($products as $product)
+                                            <?php $image = App\Models\Product::ProductImagesFirst($product->id)?>
+                                            <div class="column-xs-12 column-md-4">
+                                                <figure class="img-container">
+                                                    <div class="popup-images">
+                                                        <a class="popup-img" href="storage/{{$image->image_path}}"><img class="red" src="storage/{{$image->image_path}}" alt="aaa"></a>
+                                                    </div>
+                                                </figure>
+                                                <form id="destroyproduct" method="post" action="{{route('product.destroy',$product->id)}}" >
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
 
-                            <p class="flow-text" style="font-size:16.5px;">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                                                </form>
+                                                <a href="{{route('product.edit',$product->id)}}" style="margin-left:40px;" class="btn waves-effect waves-light" type="submit" name="action">{{__('account.edit')}}<i class="material-icons right">border_color</i></a>
+                                                <a data-original-title="Delete" data-toggle="tooltip" title="" class="btn waves-effect waves-light red tooltips js-ajax-delete" onclick="deleteProduct()" href="javascript:void(0);"><i class="material-icons center">delete_sweep</i></a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="flow-text" style="font-size:16.5px;">
+                                @php $locale = session()->get('locale'); @endphp
+                                @switch($locale)
+                                    @case('en')
 
-                                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                                            {{$product->Description['en']}}
+                                    @break
+                                    @case('hy')
+
+                                            {{$product->Description['arm']}}
+                                    @break
+                                    @default
+                                        @if($locale = 'hy')
+                                            {{$product->Description['arm']}}
+                                        @endif
+                                        @if($locale = 'en')
+                                            {{$product->Description['en']}}
+                                        @endif
+                                    @break
+                                @endswitch
+                            </p>
                             <div class="container">
                                 @foreach($orders as $order)
 
                                     @if($order->status == 'offer')
                                         <form id="acceptOffer{{$order->id}}" method="post" action="{{route('order.acceptOffer',$order->id)}}">
                                             @csrf
+                                        </form>
+                                        <form id="rejectOffer{{$order->id}}" action="{{route('order.reject',$order->id)}}" method="post">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
                                         </form>
                                     @endif
                                     @if($order->status == 'ongoing')
@@ -69,11 +114,9 @@
                                                     <div class="hide-on-small-only">Finish: {{$order->finish}}</div>
                                                 </div>
                                                 <div class="card-action">
-
-
                                                     @if($order->status == 'offer')
                                                         <a onclick="acceptOffer{{$order->id}}()" href="javascript:void(0);">{{__('account.accept')}}</a>
-                                                        <a href="#">{{__('account.reject')}}</a>
+                                                        <a onclick="rejectOffer{{$order->id}}()" href="javascript:void(0);">{{__('account.reject')}}</a>
                                                     @endif
                                                     @if($order->status == 'ongoing')
                                                             <a onclick="finishtask{{$order->id}}()" href="javascript:void(0);">{{__('account.Finish')}}</a>
@@ -89,26 +132,33 @@
                                     <script type="text/javascript">
                                         @if($order->status == 'offer')
                                             function acceptOffer{{$order->id}}(){
+                                                if (window.confirm("{{__('account.offer_message')}}")) {
                                                     document.getElementById("acceptOffer{{$order->id}}").submit();
+                                                }
+                                            }
+                                            function rejectOffer{{$order->id}}(){
+                                                document.getElementById("rejectOffer{{$order->id}}").submit();
                                             }
                                         @endif
                                         @if($order->status == 'ongoing')
                                             function finishtask{{$order->id}}(){
-                                                document.getElementById("finishtask{{$order->id}}").submit();
+                                                if (window.confirm("{{__('account.ongoing_message')}}")) {
+                                                    document.getElementById("finishtask{{$order->id}}").submit();
+                                                }
                                             }
                                         @endif
                                         @if($order->status == 'finish')
                                             function deliverytask{{$order->id}}(){
-                                                document.getElementById("deliverytask{{$order->id}}").submit();
+                                                if (window.confirm("{{__('account.finish_message')}}")) {
+                                                    document.getElementById("deliverytask{{$order->id}}").submit();
+                                                }
                                             }
                                         @endif
                                     </script>
                                 @endforeach
                             </div>
-                            <h2>My ordered tasks</h2>
+                            <h2>{{__('account.My_ordered_tasks')}}</h2>
                             <div class="container">
-
-
                                     @foreach($tasks as $task)
                                         @if($task->status == 'delivery')
                                             <form id="complatetask{{$task->id}}" method="post" action="{{route('order.completed',$task->id)}}">
@@ -157,7 +207,6 @@
 
                                         </div>
                                         <script type="text/javascript">
-
                                             function complatetask{{$task->id}}(){
                                                 document.getElementById("complatetask{{$task->id}}").submit();
                                             }
@@ -167,37 +216,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col s11">
-                        <div class="gallery">
-                            <div class="grid">
-                                @foreach($products as $product)
-                                    <?php $image = App\Models\Product::ProductImagesFirst($product->id)?>
-                                    <div class="column-xs-12 column-md-4">
-                                        <figure class="img-container">
-                                            <div class="popup-images">
-                                                <a class="popup-img" href="storage/{{$image->image_path}}"><img class="red" src="storage/{{$image->image_path}}" alt="aaa"></a>
-                                            </div>
-                                        </figure>
-                                        <form id="destroyproduct" method="post" action="{{route('product.destroy',$product->id)}}" >
-                                              {{ csrf_field() }}
-                                              {{ method_field('DELETE') }}
 
-                                        </form>
-                                        <a href="{{route('product.edit',$product->id)}}" style="margin-left:40px;" class="btn waves-effect waves-light" type="submit" name="action">{{__('account.edit')}}<i class="material-icons right">border_color</i></a>
-                                        <a data-original-title="Delete" data-toggle="tooltip" title="" class="btn waves-effect waves-light red tooltips js-ajax-delete" onclick="deleteProduct()" href="javascript:void(0);"><i class="material-icons center">delete_sweep</i></a>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                </div>
+
             </section>
         </div>
     </div>
 @endsection
 @section('js')
-
-
     <script src="{{asset('js/smooth-scroll.min.js')}}"></script>
     <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{asset('js/popup.js')}}"></script>

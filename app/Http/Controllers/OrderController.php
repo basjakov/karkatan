@@ -54,6 +54,13 @@ class OrderController extends Controller
         }
         return redirect()->back();
     }
+    public function  rejectOffer($id){
+        $order = order::findOrFail($id);
+        if(Auth::user()->id == $order->expert_id){
+            $order->rejectOffer($order);
+        }
+        return redirect()->back();
+    }
     public function finishTask($id){
         $order = order::findOrFail($id);
         if(Auth::user()->id == $order->expert_id) {
