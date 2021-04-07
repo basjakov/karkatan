@@ -110,7 +110,43 @@
     @yield('searchbox')
 </div>
 @yield('content')
+<footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l5 s12">
+                    <h5 class="white-text">{{ __('app.footer_karkatan') }}</h5>
+                    <p class="grey-text text-lighten-4">{{ __('app.What_is_karkatan_desc') }}</p>
+                    <p style="font-size:22px;"><span class="material-icons">email</span>info@karkatan.com</p>
+                    <p style="font-size:22px;"><span class="material-icons">phone</span>+(374) 55 05 05 55</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">{{ __('app.links') }}</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="{{route('products')}}">{{ __('app.Products') }}</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{{route('experts')}}">{{ __('app.Experts') }}</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{{route('experts')}}">{{ __('app.terms_of_servie') }}</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{{route('experts')}}">{{ __('app.vacancies') }}</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{{route('experts')}}">{{ __('app.sitemap') }}</a></li>
+                        <li><a class="grey-text text-lighten-3" href=""></a></li>
 
+                    </ul>
+                </div>
+                <div class="col l1 s12">
+                    <h5 class="white-text">{{ __('app.login') }}</h5>
+                    <ul>
+                        @if (!Auth::check())
+                            <li><a class="footer_login_a" href="{{route('login')}}">{{ __('app.Login') }}</a></li>
+                            <li><a class="footer_login_a" href="{{route('makeaccount')}}">{{ __('app.Register') }}</a></li>
+                        @else
+                            <li><a class="footer_login_a" href="{{route('dashboard')}}">{{Auth::user()->username}}</a></li>
+                            <li><a class="footer_login_a" href="{{route('logout')}}">{{ __('app.Logout') }}</a></li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </div>
+</footer>
+</body>
 <script type="text/javascript" src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/materialize.min.js')}}"></script>
 <script type="text/javascript">

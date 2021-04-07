@@ -9,10 +9,12 @@ use App\Models\productimages;
 class PagesController extends Controller
 {
     public function Home(){
-        return view('website.home');
+        $users = User::where('status','top_expert')->paginate(15);
+        $products = Product::where('status','top_product')->paginate(15);
+        return view('website.home',compact('users','products'));
     }
     public function Experts(){
-        $users = User::where('status','expert')->paginate(15);
+        $users = User::where('status','expert')->orwhere('status','top_expert')->paginate(15);
         return view('website.profiles',['users'=>$users]);
     }
     public function ShowExpert($username){

@@ -3,7 +3,6 @@
     <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 @endsection
 @section('content')
-
     <div class="container">
         <div class="row scrollspy">
             <section style="margin-top:50px;">
@@ -61,7 +60,6 @@
                                                         @if($order->status == 'completed')
                                                             <span class="completed_title" >{{$order->status}}</span>
                                                         @endif
-
                                                             {{$order->project_name}}   </br>
                                                         <span style="font-size: 16px;">{{$order->title}}</span>
                                                     </span>

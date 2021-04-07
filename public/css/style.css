@@ -18,15 +18,17 @@
     font-weight: 700;
     color:#0c0b31;
 }
-.home_page_more h1 {
-    font-family:'Milliard Book';font-weight:normal;font-size:60px;
+.home_page_more h2 {
+    text-transform: uppercase;
+    font-family:sans-serif,'Milliard Book';
+    font-weight:normal;
+    font-size:45px;
     line-height: 92px;
     color: #0c0b31;
 }
 nav{
     background: none;
     border-top: 0 ;
-    background: none;
     background-image: url('../img/homepagebackground.jpg');
     color: white;
 }
@@ -167,10 +169,11 @@ h1 {
   width: 100%;
 }
 
-/*vehicle*/
+/*products*/
 .container_heading{
   text-align: center;
   text-transform: capitalize;
+    font-family: sans-serif,'Milliard Book';
   margin-left: auto;
   margin-right: auto;
   max-width: 850px;
@@ -215,6 +218,7 @@ h1 {
   font-size:25px;
   font-family: 'Titillium Web', sans-serif;
 }
+
 .tools_desc{
   max-width: 250px;
   padding: 2px;
@@ -368,3 +372,22 @@ h1 {
     text-transform: uppercase;
     background: #26a69a;
 }
+footer div{
+    background: none;
+}
+footer{
+    border-top: 0 ;
+    background-image: url('../img/homepagebackground.jpg');
+    color: white;
+}
+footer .row{
+    margin-bottom: 0;
+}
+.footer_login_a{
+    color:#fff;
+    font-size: 25px;
+    font-family: 'Titillium Web', sans-serif;
+}
+ .footer_login_a:hover{
+    color:#0073ec;
+ }

@@ -17,8 +17,52 @@
 
     <div class="home_page_more">
         <div class="container_heading">
-            <h1>Top experts</h1>
-            <p>Մեր թոփ մասնագետները ընտրվում են կայքի կողմից ՝ հիմնվելով որակի և հաճախորդների կարծիքի վրա:Մեր թոփում հայտնվելու համար էքսպերտը ոչ մի հավելյալ բան չի գնում,այլ կարող է ընտրվել մի միայն կայքի կողմից իր որակին և   փորձառությանը համապատասխան:</p>
+            <h2>{{__('app.Top_experts')}}</h2>
+            <p>{{__('app.Top_experts_desc')}}</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row scrollspy">
+            @foreach($users as $user)
+                <div class="col s12 l4" >
+                    <div class="image_wrap">
+                        <img src="/storage/{{$user->profile_photo}}" class="vehicle_image">
+                        <h5>{{$user->name}} {{$user->lastname}}</h5>
+                        <span class="tools_username">@|{{$user->username}}</span>
+                        <span class="tools_position">{{$user->position}}</span>
+                        <span class="tools_position">{{$user->country}}</span>
+                        <a href="{{route('expert.show',$user->username)}}" class="btnmore">{{ __('app.more') }}</a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="home_page_more">
+            <div class="container_heading">
+                <h2>{{__('app.Top_Products')}}</h2>
+                <p></p>
+            </div>
+        </div>
+            <div class="row scrollspy">
+                @foreach($products as $product)
+                    <div class="col s12 l4" >
+                        <div class="image_wrap">
+                            <?php $image = App\Models\Product::ProductImagesFirst($product->id)?>
+                            <img src="storage/{{$image->image_path}}" class="vehicle_image">
+                            <h5>{{$product->name}}</h5>
+                            <span class="tools_username">{{$product->title}}</span>
+                            <span class="tools_position"></span>
+                            <span class="tools_position">{{$product->tools}}</span>
+                            <a href="{{route('product.show',['id'=>$product->id,'name'=>$product->name])}}" class="btnmore">{{ __('app.more') }}</a>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        <div class="home_page_more">
+            <div class="container_heading">
+                <h2>{{__('app.What_is_karkatan')}}</h2>
+                <p>{{__('app.What_is_karkatan_desc')}}</p>
+            </div>
         </div>
     </div>
 @endsection

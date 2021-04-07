@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TermsController;
+use App\Http\Controllers\VacanciesController;
 
     Route::get('lang/{locale}', [LocalizationController::class,'index'])->name('lang');
 
@@ -23,13 +25,13 @@ use App\Http\Controllers\OrderController;
         Route::post('/order/create',[OrderController::class,'sendOffer'])->name('order.offer');
         Route::post('/order/acceptoffer/{id}',[OrderController::class,'acceptOffer'])->name('order.acceptOffer');
         Route::post('/order/finishtask/{id}',[OrderController::class,'finishtask'])->name('order.finishtask');
-
         Route::post('/order/delivery/{id}',[OrderController::class,'delivery'])->name('order.delivery');
         Route::post('/order/completed/{id}',[OrderController::class,'completed'])->name('order.completed');
         Route::post('/order/canceled/{id}',[OrderController::class,'canceled'])->name('order.canceled');
-
     });
 
+    Route::get('/terms',[TermsController::class,'show'])->name('terms');
+    Route::get('/vacancies',[VacanciesController::class,'index'])->name('vacancies');
 
     Route::get('/products',[PagesController::class,'Products'])->name('products');
     Route::get('/experts',[PagesController::class,'Experts'])->name('experts');
