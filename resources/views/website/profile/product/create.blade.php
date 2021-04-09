@@ -192,6 +192,7 @@
                 <input type="submit" class="waves-effect waves-light btn-small" value="{{__('product.create_product')}}">
             </form>
         </div>
+    </div>
 @endsection
 @section('js')
             <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>

@@ -19,8 +19,9 @@ class PagesController extends Controller
     }
     public function ShowExpert($username){
         $profile = User::where('username',$username)->first();
+        $expert_desc = json_decode($profile->description,true);
         $products = Product::where('user_id',$profile->id)->get();
-        return view('website.expertprofile',compact('profile','products'));
+        return view('website.expertprofile',compact('profile','products','expert_desc'));
     }
     public function Products(){
         $products = Product::paginate(42);

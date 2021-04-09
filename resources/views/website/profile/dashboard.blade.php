@@ -88,30 +88,30 @@
                                                 <div class="card-content white-text">
                                                     <span class="card-title">
                                                         @if($order->status == 'offer')
-                                                            <span class="offer_title" >{{$order->status}}</span>
+                                                            <span class="offer_title" >{{__('account.offer')}}</span>
                                                         @endif
                                                         @if($order->status == 'accepted')
                                                             <span class="accepted_title" >{{$order->status}}</span>
                                                         @endif
                                                         @if($order->status == 'ongoing')
-                                                            <span class="ongoing_title" >{{$order->status}}</span>
+                                                            <span class="ongoing_title" >{{__('account.ongoing')}}</span>
                                                         @endif
                                                         @if($order->status == 'finish')
-                                                            <span class="finish_title" >{{$order->status}}</span>
+                                                            <span class="finish_title" >{{__('account.finished')}}</span>
                                                         @endif
                                                         @if($order->status == 'delivery')
-                                                            <span class="delivery_title" >{{$order->status}}</span>
+                                                            <span class="delivery_title" >{{__('account.delivery')}}</span>
                                                         @endif
                                                         @if($order->status == 'completed')
-                                                            <span class="completed_title" >{{$order->status}}</span>
+                                                            <span class="completed_title" >{{__('account.completed')}}</span>
                                                         @endif
                                                             {{$order->project_name}}   </br>
                                                         <span style="font-size: 16px;">{{$order->title}}</span>
                                                     </span>
 
                                                     <p>{{$order->description}}</p>
-                                                    <div class="hide-on-small-only">To: {{$order->to}}</div>
-                                                    <div class="hide-on-small-only">Finish: {{$order->finish}}</div>
+                                                    <div class="hide-on-small-only">{{__('account.to')}} : {{$order->to}}</div>
+                                                    <div class="hide-on-small-only">{{__('account.finish')}} : {{$order->finish}}</div>
                                                 </div>
                                                 <div class="card-action">
                                                     @if($order->status == 'offer')
@@ -119,7 +119,7 @@
                                                         <a onclick="rejectOffer{{$order->id}}()" href="javascript:void(0);">{{__('account.reject')}}</a>
                                                     @endif
                                                     @if($order->status == 'ongoing')
-                                                            <a onclick="finishtask{{$order->id}}()" href="javascript:void(0);">{{__('account.Finish')}}</a>
+                                                            <a onclick="finishtask{{$order->id}}()" href="javascript:void(0);">{{__('account.finished')}}</a>
                                                     @endif
                                                     @if($order->status=='finish')
                                                             <a onclick="deliverytask{{$order->id}}()" href="javascript:void(0);">{{__('account.delivery')}}</a>
@@ -171,30 +171,30 @@
                                                     <div class="card-content white-text">
                                                         <span class="card-title">
                                                             @if($task->status == 'offer')
-                                                                <span class="offer_title" >{{$task->status}}</span>
+                                                                <span class="offer_title" >{{__('account.offer')}}</span>
                                                             @endif
                                                             @if($task->status == 'accepted')
                                                                     <span class="accepted_title" >{{$task->status}}</span>
                                                             @endif
                                                             @if($task->status == 'ongoing')
-                                                                    <span class="ongoing_title" >{{$task->status}}</span>
+                                                                    <span class="ongoing_title" >{{__('account.ongoing')}}</span>
                                                             @endif
                                                             @if($task->status == 'finish')
-                                                                <span class="finish_title" >{{$task->status}}</span>
+                                                                <span class="finish_title" >{{__('account.finished')}}</span>
                                                             @endif
                                                             @if($task->status == 'delivery')
-                                                                    <span class="delivery_title" >{{$task->status}}</span>
+                                                                    <span class="delivery_title" >{{__('account.delivery')}}</span>
                                                             @endif
                                                             @if($task->status == 'completed')
-                                                                    <span class="completed_title" >{{$task->status}}</span>
+                                                                    <span class="completed_title" >{{__('account.completed')}}</span>
                                                             @endif
                                                             {{$task->project_name}}   </br>
                                                             <span style="font-size: 16px;">{{$task->title}}</span>
                                                         </span>
 
                                                         <p>{{$task->description}}</p>
-                                                        <div class="hide-on-small-only">To: {{$task->to}}</div>
-                                                        <div class="hide-on-small-only">Finish: {{$task->finish}}</div>
+                                                        <div class="hide-on-small-only">{{__('account.to')}}: {{$task->to}}</div>
+                                                        <div class="hide-on-small-only">{{__('account.finish')}}: {{$task->finish}}</div>
                                                     </div>
                                                     <div class="card-action">
                                                            @if($task->status == 'delivery')

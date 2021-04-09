@@ -44,11 +44,13 @@
         'reject'=>'Reject',
         'ongoing'=>'Ongoing',
         'ongoing_message'=>'You confirm that you finished order',
-        'Finish'=>'Finished',
+        'finished'=>'Finished',
         'finish_message'=>'Please make the delivery on time',
         'delivery'=>'Delivery',
         'completed'=>'Completed',
         'canceled'=>'Canceled',
         'My_ordered_tasks'=>'My ordered tasks',
+        'to'=>'To',
+        'finish'=>'Finish',
     ]
 ?>
