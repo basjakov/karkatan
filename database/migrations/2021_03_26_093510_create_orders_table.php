@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->enum('status', ['offer', 'ongoing','finish','delivery','completed','canceled']);
             $table->string('title');
             $table->longtext('description');
-            $table->string('filename');
+            $table->string('filename')->nullable();
             $table->integer('budget');
             $table->enum('currency', ['usd','eur', 'rub','amd']);
             $table->date('to');

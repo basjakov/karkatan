@@ -37,9 +37,8 @@ class order extends Model
         $order->client_id = Auth::user()->id;
         if ($validated['filename']) {
             $file = $validated['filename'];
-            $order_photo_url = Storage::disk('local')->putFile("/public/order/$order->expert_id/$order->project_name", $file);
-        } else {
-            $order_photo_url = 'https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_male_user-512.png';
+            Storage::disk('local')->putFile("/public/order/$order->expert_id/$order->project_name", $file);
+            $order_photo_url = '/storage/order/'.$order->expert_id.'/'.$order->project_name.'/'.$file->hashname();
         }
         $order->filename = $order_photo_url;
         $order->budget = $validated['budget'];
@@ -74,21 +73,23 @@ class order extends Model
 //        ];
 //        Mail::to($client_email)->send(new AcceptOffer($details2));
     }
-    public function  rejectOffer($order){
-        $folder_path = 'storage/order/'.$order->expert_id.'/'.$order->project_name;
+    public function  rejectOffer($request,$order){
+        $validated = $request->validated();
+        if ($validated['filename']) {
+            $folder_path = 'storage/order/' . $order->expert_id . '/' . $order->project_name;
 
-        $files = glob($folder_path.'/*');
+            $files = glob($folder_path . '/*');
 
-        // Deleting all the files in the list
-        foreach($files as $file) {
+            // Deleting all the files in the list
+            foreach ($files as $file) {
 
-            if(is_file($file))
+                if (is_file($file))
 
-                // Delete the given file
-                unlink($file);
+                    // Delete the given file
+                    unlink($file);
+            }
+            rmdir('storage/order/' . $order->expert_id . '/' . $order->project_name . '/');
         }
-        rmdir('storage/order/'.$order->expert_id.'/'.$order->project_name.'/');
-
 
         $order->delete();
     }

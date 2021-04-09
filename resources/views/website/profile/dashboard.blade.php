@@ -110,6 +110,7 @@
                                                     </span>
 
                                                     <p>{{$order->description}}</p>
+                                                    <span style="font-size: 26px;"><a href="{{$order->filename}}">File</a></span>
                                                     <div class="hide-on-small-only">{{__('account.to')}} : {{$order->to}}</div>
                                                     <div class="hide-on-small-only">{{__('account.finish')}} : {{$order->finish}}</div>
                                                 </div>
@@ -193,6 +194,7 @@
                                                         </span>
 
                                                         <p>{{$task->description}}</p>
+                                                        <span style="font-size: 26px;"><a href="{{$task->filename}}" target="_blank">File</a></span>
                                                         <div class="hide-on-small-only">{{__('account.to')}}: {{$task->to}}</div>
                                                         <div class="hide-on-small-only">{{__('account.finish')}}: {{$task->finish}}</div>
                                                     </div>
