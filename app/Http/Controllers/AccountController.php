@@ -27,7 +27,8 @@ class AccountController extends Controller
                 $file = $request->file('profile_image');
                 $profile_photo_url = Storage::disk('local')->putFile("/public/profiles/$username", $file);
             } else {
-                $profile_photo_url = 'https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_male_user-512.png';
+                #
+                $profile_photo_url = 'noteimage';
             }
             User::create([
                 'name' => $validated['name'],
@@ -55,7 +56,7 @@ class AccountController extends Controller
     }
     public function Dashboard(){
             $userid = Auth::user()->id;
-            $products = Product::paginate(30);
+            $products = Product::where('user_id',Auth::user()->id)->paginate(30);
             $user = User::find($userid);
             $orders = order::where('expert_id',Auth::user()->id)->paginate();
             $ordered_tasks = order::where('client_id',Auth::user()->id)->paginate();

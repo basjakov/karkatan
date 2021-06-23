@@ -9,55 +9,64 @@
                 <div class="row">
                     <div class="col s12">
                         <div class="center-align">
-                            <img class="responsive-img circle" width="120px" height="120px" src="/storage/{{$user->profile_photo}}">
+                            <img class="responsive-img circle" width="120px" height="120px" src="
+                            @if($user->profile_photo=='noteimage')
+                                https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_male_user-512.png                    
+                            @else
+                                storage/{{$user->profile_photo}}                                            
+                            @endif">
                             <h2 class="name_lastnamepart">{{$user->name}} {{$user->lastname}}</h2>
                             <h5 class="username_profile"></h5>
                             <a href="{{route('product.create')}}" class="btn-floating btn-large pulse"><i class="material-icons">add_circle</i></a>
                             <div class="col s12">
-                                <h2 class="container_heading">{{__('account.my_products')}}</h2>
+                               @if(isset($products))  <h2 class="container_heading">{{__('account.my_products')}}</h2> @endif
                                 <div class="gallery">
-                                    <div class="grid">
-                                        @foreach($products as $product)
-                                            <?php $image = App\Models\Product::ProductImagesFirst($product->id)?>
-                                            <div class="column-xs-12 column-md-4">
-                                                <figure class="img-container">
-                                                    <div class="popup-images">
-                                                        <a class="popup-img" href="storage/{{$image->image_path}}"><img class="red" src="storage/{{$image->image_path}}" alt="aaa"></a>
-                                                    </div>
-                                                </figure>
-                                                <form id="destroyproduct" method="post" action="{{route('product.destroy',$product->id)}}" >
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
+                                    <div class="grid">                                                                       
+                                       @if(isset($products)) 
+                                            @foreach($products as $product)                                         
+                                                <?php $image = App\Models\Product::ProductImagesFirst($product->id)?>
+                                                <div class="column-xs-12 column-md-4">
+                                                    <figure class="img-container">
+                                                        <div class="popup-images">
+                                                            <a class="popup-img" href="storage/{{$image->image_path}}"><img class="red" src="storage/{{$image->image_path}}" alt="aaa"></a>
+                                                        </div>
+                                                    </figure>
+                                                    <form id="destroyproduct" method="post" action="{{route('product.destroy',$product->id)}}" >
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
 
-                                                </form>
-                                                <a href="{{route('product.edit',$product->id)}}" style="margin-left:40px;" class="btn waves-effect waves-light" type="submit" name="action">{{__('account.edit')}}<i class="material-icons right">border_color</i></a>
-                                                <a data-original-title="Delete" data-toggle="tooltip" title="" class="btn waves-effect waves-light red tooltips js-ajax-delete" onclick="deleteProduct()" href="javascript:void(0);"><i class="material-icons center">delete_sweep</i></a>
-                                            </div>
-                                        @endforeach
+                                                    </form>
+                                                    <a href="{{route('product.edit',$product->id)}}" style="margin-left:40px;" class="btn waves-effect waves-light" type="submit" name="action">{{__('account.edit')}}<i class="material-icons right">border_color</i></a>
+                                                    <a data-original-title="Delete" data-toggle="tooltip" title="" class="btn waves-effect waves-light red tooltips js-ajax-delete" onclick="deleteProduct()" href="javascript:void(0);"><i class="material-icons center">delete_sweep</i></a>
+                                                    <p class="flow-text" style="font-size:16.5px;">
+                                                        @php $locale = session()->get('locale'); @endphp
+                                                        @switch($locale)
+                                                            @case('en')
+
+                                                                    {{$product->Description['en']}}
+                                                            @break
+                                                            @case('arm')
+
+                                                                    {{$product->Description['arm']}}
+                                                            @break
+                                                            @default
+                                                                @if($locale = 'arm')
+                                                                    {{$product->Description['arm']}}
+                                                                @endif
+                                                                @if($locale = 'en')
+                                                                    {{$product->Description['en']}}
+                                                                @endif
+                                                            @break
+                                                        @endswitch
+                                                    </p>
+                                                </div>
+                                            @endforeach
+                                        @else 
+                                             {{-- <div class="column-xs-12 column-md-4"><p>{{__('account.not_product')}}</p></div> --}}
+                                        @endif    
                                     </div>
                                 </div>
-                            </div>
-                            <p class="flow-text" style="font-size:16.5px;">
-                                @php $locale = session()->get('locale'); @endphp
-                                @switch($locale)
-                                    @case('en')
-
-                                            {{$product->Description['en']}}
-                                    @break
-                                    @case('hy')
-
-                                            {{$product->Description['arm']}}
-                                    @break
-                                    @default
-                                        @if($locale = 'hy')
-                                            {{$product->Description['arm']}}
-                                        @endif
-                                        @if($locale = 'en')
-                                            {{$product->Description['en']}}
-                                        @endif
-                                    @break
-                                @endswitch
-                            </p>
+                            </div>                           
                             <div class="container">
                                 @foreach($orders as $order)
 
@@ -105,7 +114,7 @@
                                                         @if($order->status == 'completed')
                                                             <span class="completed_title" >{{__('account.completed')}}</span>
                                                         @endif
-                                                            {{$order->project_name}}   </br>
+                                                            {{$order->project_name}}  
                                                         <span style="font-size: 16px;">{{$order->title}}</span>
                                                     </span>
 

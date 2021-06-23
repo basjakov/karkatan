@@ -26,9 +26,12 @@ class OrderController extends Controller
      */
     public function create($profile_id)
     {
-
-        $expert = User::select('id')->where('id',$profile_id)->pluck('id');
-        return view('website.order.create_order',['expert'=>$expert[0]]);
+        if (Auth::user()->id != $profile_id){
+            $expert = User::select('id')->where('id',$profile_id)->pluck('id');
+            return view('website.order.create_order',['expert'=>$expert[0]]);
+        }else{
+            return redirect()->back();
+        }    
     }
 
     /**

@@ -5,17 +5,18 @@
                 <div class="col s4 profile_card">
                     <div class="center-align">
                         <img class="responsive-img circle" width="120px" height="120px" src="storage/{{$profile->profile_photo}}">
-
                         <h4 class="name_lastnamepart">{{$profile->name}} {{$profile->lastname}}</h4>
                         <h5 class="username_profile">{{$profile->position}}</h5>
                         <h6 class="postition"><i class="fas fa-compass location_icon"></i> {{$profile->region}} {{$profile->city}},{{$profile->country}}</h6>
                         @if(Auth::check())
-                        <button  onclick="window.location.href='{{route('order.create',$profile->id)}}'" class="btn waves-effect waves-light" type="submit" name="action">Order
-                            <i class="material-icons right">book_online</i>
-                        </button>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Message
-                            <i class="material-icons right">send</i>
-                        </button>
+                          @if(Auth::user()->id != $profile->id)   
+                                <button  onclick="window.location.href='{{route('order.create',$profile->id)}}'" class="btn waves-effect waves-light" type="submit" name="action">Order
+                                    <i class="material-icons right">book_online</i>
+                                </button>
+                                <button class="btn waves-effect waves-light" type="submit" name="action">Message
+                                    <i class="material-icons right">send</i>
+                                </button>
+                           @endif 
                         @endif
                         <p class="flow-text" style="font-size:16.5px;">
                             @php $locale = session()->get('locale'); @endphp

@@ -52,5 +52,6 @@
         'My_ordered_tasks'=>'My ordered tasks',
         'to'=>'To',
         'finish'=>'Finish',
+        'not_product'=>'Դուք չունեք ավելացրած սեփական պրոդուկտներ,եթե ցանկանում է այն ավելացերեք ',
     ]
 ?>
