@@ -27,11 +27,12 @@ class OrderController extends Controller
     public function create($profile_id)
     {
         if (Auth::user()->id != $profile_id){
+
             $expert = User::select('id')->where('id',$profile_id)->pluck('id');
             return view('website.order.create_order',['expert'=>$expert[0]]);
         }else{
             return redirect()->back();
-        }    
+        }
     }
 
     /**
@@ -81,7 +82,7 @@ class OrderController extends Controller
     public function completed($id){
         $order = order::findOrFail($id);
         if(Auth::user()->id == $order->client_id) {
-            $order->completed($order);
+            return redirect()->route('order.stripe.form',$order->id);
         }
         return redirect()->back();
     }

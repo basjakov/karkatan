@@ -62,6 +62,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $productimages = productimages::where('product_id',$product->id)->get();
+
         return view('website.product.show',compact('product','productimages'));
     }
 

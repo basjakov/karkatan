@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\OfferOrderTask;
 use Illuminate\Support\Facades\Storage;
 
+
 class order extends Model
 {
     use HasFactory;

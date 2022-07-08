@@ -12,17 +12,16 @@
         "ext-json": "*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
-        "getsupercode/localizater": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "josiasmontag/laravel-localization": "^0.8.2",
+        "laravel/cashier": "^13.11",
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^2.1",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "livewire/livewire": "^2.0",
-        "munafio/chatify": "^1.0",
-        "pusher/pusher-php-server": "4.0.*"
+        "pusher/pusher-php-server": "7.0.*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

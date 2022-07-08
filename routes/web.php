@@ -8,6 +8,7 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\VacanciesController;
+use App\Http\Controllers\StripeController;
 
     Route::get('lang/{locale}', [LocalizationController::class,'index'])->name('lang');
 
@@ -17,6 +18,8 @@ use App\Http\Controllers\VacanciesController;
     Route::post('/makeaccount',[AccountController::class,'store'])->name('storeaccount');
 
     Route::get('/dashboard/profile/{id}',[AccountController::class,'show'])->name('userprofile.show');
+
+
 
     Route::prefix('/dashboard')->middleware(['auth', 'auth'])->group(function () {
         Route::resource('/product', ProductController::class);
@@ -29,6 +32,8 @@ use App\Http\Controllers\VacanciesController;
         Route::post('/order/delivery/{id}',[OrderController::class,'delivery'])->name('order.delivery');
         Route::post('/order/completed/{id}',[OrderController::class,'completed'])->name('order.completed');
         Route::post('/order/canceled/{id}',[OrderController::class,'canceled'])->name('order.canceled');
+        Route::get('stripe/{order_id}', [StripeController::class, 'stripe'])->name('order.stripe.form');
+        Route::post('stripe/{order_id}', [StripeController::class, 'stripePost'])->name('order.stripe.post');
     });
 
     Route::get('/terms',[TermsController::class,'show'])->name('terms');
