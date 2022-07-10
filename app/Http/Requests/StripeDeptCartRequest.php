@@ -14,6 +14,7 @@ class StripeDeptCartRequest extends FormRequest
      */
     public function authorize()
     {
+       
         return true;
     }
 
@@ -24,13 +25,9 @@ class StripeDeptCartRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
-            'name'=>'required|string',
-            'cardnumber'=>'required|numeric',
-            'cvc'=>'required|numeric',
-            'exp_month'=>'required|numeric',
-            'exp_year'=>'required|numeric',
-            'stripeToken'=>'required',
+           
         ];
     }
 }

@@ -22,7 +22,7 @@ class StripeController extends Controller
      */
     public function stripePost(StripeDeptCartRequest $request)
     {
-
+       dd($request);die;
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         Stripe\Charge::create ([
             "amount" => 100 * 100,
