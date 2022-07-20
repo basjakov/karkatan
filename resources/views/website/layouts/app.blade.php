@@ -20,6 +20,7 @@
     <script defer src="{{asset('css/fontawesome-free-5.15.2-web/js/solid.js')}}"></script>
     <script defer src="{{asset('css/fontawesome-free-5.15.2-web/js/fontawesome.js')}}"></script> -->
     @yield('css')
+    @livewireStyles
 </head>
 
 <body>
@@ -200,5 +201,6 @@
 
 </script>
 @yield('js')
+@livewireScripts
 </body>
 </html>

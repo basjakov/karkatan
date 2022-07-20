@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{asset('css/fontawesome-free-5.15.2-web/css/fontawesome.css')}}" rel="stylesheet">
+    <link href="{{asset('css/fontawesome-free-5.15.2-web/css/brands.css')}}" rel="stylesheet">
+    <link href="{{asset('css/fontawesome-free-5.15.2-web/css/solid.css')}}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <title>Karkatan payment</title>
     <style>
         *,
@@ -339,7 +343,7 @@
                width="47.834px" height="47.834px" viewBox="0 0 47.834 47.834" style="enable-background:new 0 0 47.834 47.834;">
             <g>
               <g>
-               
+
               </g>
             </g>
           </svg>
@@ -384,42 +388,61 @@
       </div>
     </div>
   </div>
-  <form class="form" 
+  <form class="form"
         role="form"
         action="{{ route('order.stripe.post',$order->id) }}"
         method="post"
         data-cc-on-file="false"
         data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
         autocomplete="off"
-        novalidate 
-        class="require-validation"
+        novalidate
         id="payment-form">
     @csrf
     <fieldset>
         @if($errors->has('cardnumber'))
             <label class='control-label help-block text-danger'>{{ $errors->first('name') }}</label>
         @endif
+        <label style="font-size:20px;">Ammount {{$order->budget}}
+                <?php  if($order->currency == 'usd'){
+                            echo '<i class="fas fa-dollar-sign"></i>';
+                        }
+                        else if($order->currency == 'eur'){
+                            echo '<i class="fas fa-euro-sign"></i>';
+                        }
+                        else if($order->currency == 'rub'){
+                            echo '<i class="fas fa-ruble-sign"></i>';
+                        }
+                        else if($order->currency == 'amd'){
+                            echo '<i>Դրամ</i>';
+                        }
+                ?>
+        </label>
+        <input type="hidden" name="ammount" value="{{$order->budget}}">
       <label for="card-number">Card Number</label>
-      <input type="num" id="card-number" class="input-cart-number" maxlength="4" />
-      <input type="num" id="card-number-1" class="input-cart-number" maxlength="4" />
-      <input type="num" id="card-number-2" class="input-cart-number" maxlength="4" />
-      <input type="num" id="card-number-3" class="input-cart-number" maxlength="4" />
-      <input type="hidden" class="card_number card-number" name="cardnumber" >
+{{--      <input type="num" id="card-number" class="input-cart-number" maxlength="4" />--}}
+{{--      <input type="num" id="card-number-1" class="input-cart-number" maxlength="4" />--}}
+{{--      <input type="num" id="card-number-2" class="input-cart-number" maxlength="4" />--}}
+{{--      <input type="num" id="card-number-3" class="input-cart-number" maxlength="4" />--}}
+            <div class="required">
+                <input type="number" minlength="8" maxLength="20" class="card-number" name="cardnumber" required />
+            </div>
     </fieldset>
     <fieldset>
         @if($errors->has('name'))
             <label class='control-label help-block text-danger'>{{ $errors->first('name') }}</label>
         @endif
       <label for="card-holder">Card holder</label>
-      <input type="text" id="card-holder" name="name"/>
+            <div class="required">
+                <input type="text" id="card-holder" name="name" required/>
+            </div>
     </fieldset>
     <fieldset class="fieldset-expiration">
         @if($errors->has('exp_month'))
             <label class='control-label help-block text-danger'>{{ $errors->first('exp_month') }}</label>
         @endif
-      <label for="card-expiration-month">Expiration date</label>
+      <label for="card-expiration-month">Expiration date</label><div class="required">
       <div class="select">
-        <select id="card-expiration-month" name="exp_month" class="card-expiry-month" >
+        <select id="card-expiration-month" name="exp_month" class="card-expiry-month" required>
           <option></option>
           <option>01</option>
           <option>02</option>
@@ -439,7 +462,7 @@
             <label class='control-label help-block text-danger'>{{ $errors->first('exp_year') }}</label>
         @endif
       <div class="select">
-        <select id="card-expiration-year" name="exp_year" class="card-expiry-year">
+        <select id="card-expiration-year" name="exp_year" class="card-expiry-year" required>
           <option></option>
           <option>2022</option>
           <option>2023</option>
@@ -453,9 +476,11 @@
             <label class='control-label help-block text-danger'>{{ $errors->first('cvc') }}</label>
         @endif
       <label for="card-ccv">CCV</label>
-      <input type="text" class="card-cvc" id="card-ccv" maxlength="3" name="cvc"/>
+        <div class="required">
+            <input type="text" class="card-cvc" id="card-ccv" maxlength="3" name="cvc" required/>
+        </div>
     </fieldset>
-    <button class="btn"><i class="fa fa-lock"></i> Pay Now</button>
+    <button class="btn" type="submit"><i class="fa fa-lock"></i> Pay Now</button>
   </form>
 </div>
 <a class="the-most" target="_blank" href="https://stripe.com/">
@@ -464,25 +489,34 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 
-    $(".input-cart-number").on("keyup change", function () {
+    $(".card-number").on("keyup change", function () {
         $t = $(this);
 
         if ($t.val().length > 3) {
             $t.next().focus();
         }
 
-        var card_number = "";
-        $(".input-cart-number").each(function () {
-            card_number += $(this).val() + " ";
-            if ($(this).val().length == 4) {
-            $(this).next().focus();
+        // $(".input-cart-number").each(function () {
+        //     card_number += $(this).val() + " ";
+        //     if ($(this).val().length == 4) {
+        //     $(this).next().focus();
+        //     }
+        // });
+        card_number = $("input[name='cardnumber']").val();
+        card_number = card_number.toString();
+        card_number = card_number.replace(/.{4}/g, '$& ');
+        function card_size(){
+            if(card_number.length >= 21){
+                card_number.slice(0,-1);
+                card_size()
             }
-        });
-            
+        }
+        card_size();
+
         $(".credit-card-box .number").html(card_number);
-        card_number = Parseint(card_number);
-       
-        $("input[name='cardnumber']").val(card_number);
+
+
+
     });
 
 $("#card-holder").on("keyup change", function () {
@@ -532,29 +566,14 @@ setTimeout(function () {
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
     $(function() {
-        var $form = $(".require-validation");
-        $('form.require-validation').bind('submit', function(e) {
-            var $form = $(".require-validation"),
-                inputSelector = ['input[type=email]', 'input[type=password]',
-                    'input[type=text]', 'input[type=file]',
-                    'textarea'
-                ].join(', '),
-                $inputs = $form.find('.required').find(inputSelector),
-                $errorMessage = $form.find('div.error'),
-                valid = true;
-            $errorMessage.addClass('hide');
-            $('.has-error').removeClass('has-error');
-            $inputs.each(function(i, el) {
-                var $input = $(el);
-                if ($input.val() === '') {
-                    $input.parent().addClass('has-error');
-                    $errorMessage.removeClass('hide');
-                    e.preventDefault();
-                }
-            });
+
+        var $form = $(".form");
+
+        $form.bind('submit', function(e) {
+            alert('lorenso');
             if (!$form.data('cc-on-file')) {
                 e.preventDefault();
-                Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+                Stripe.setPublishableKey('pk_test_qpdXjjgLKiLjNJTRPI8QtYWw00SisBwXl2');
                 Stripe.createToken({
                     number: $('.card-number').val(),
                     cvc: $('.card-cvc').val(),
@@ -581,7 +600,7 @@ setTimeout(function () {
 </script>
 </body>
 </html>
-<!-- 
+<!--
 <!DOCTYPE html>
 <html>
 <head>
